@@ -51,9 +51,10 @@ parseVCalendar _ = throwError "parseVCalendar: Content given not a VCALENDAR\
                               \ component."
 
 -- | Parse a VEVENT component. 3.6.1
-parseVEvent :: Maybe Method -> Content -> ContentParser VEvent
+-- parseVEvent :: Maybe Method -> Content -> ContentParser VEvent
 parseVEvent mmethod (Component _ "VEVENT" _) = do
-    veDTStamp <- reqLine1 "DTSTAMP" $ parseSimpleUTC DTStamp
+    veDTStamp <- optLine1 "DTSTAMP" $
+                  Just .: parseSimpleUTC DTStamp
     veUID <- reqLine1 "UID" $ parseSimple UID
     veDTStart <- optLine1 "DTSTART" $
                   Just .: parseSimpleDateOrDateTime DTStartDateTime DTStartDate

@@ -142,7 +142,7 @@ data Method = Method
 
 -- | Event Component. 3.6.1.
 data VEvent = VEvent
-    { veDTStamp       :: DTStamp
+    { veDTStamp       :: Maybe DTStamp
     , veUID           :: UID
     , veClass         :: Class -- ^ 'def' = 'Public'
     , veDTStart       :: Maybe DTStart
